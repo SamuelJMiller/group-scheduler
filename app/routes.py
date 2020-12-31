@@ -147,7 +147,9 @@ def friends_list():
 @app.route('/friends/requests')
 @login_required
 def friend_requests():
-    return render_template('friend_requests.html', title='Friend Requests')
+    a_form = EmptyForm()
+    d_form = EmptyForm()
+    return render_template('friend_requests.html', title='Friend Requests', user=User, acc_form=a_form, dec_form=d_form)
 
 @app.route('/friends/find')
 @login_required
@@ -168,3 +170,26 @@ def add_friend(userid):
     FriendRequest.send_friend_request(current_user.id, userid)
     db.session.commit()
     return redirect(url_for('user_profile', userid=userid))
+
+@app.route('/accept_friend/<userid>', methods=['POST'])
+@login_required
+def accept_friend(userid):
+    user = User.query.filter_by(id=userid).first()
+    old_request = FriendRequest.query.filter_by(sender_id=userid, receiver_id=current_user.id).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        current_user.add_friend(user)
+        db.session.delete(old_request)
+        db.session.commit()
+        flash('You are now friends with ' + user.username + '!')
+        return redirect(url_for('friends_list'))
+
+@app.route('/decline_friend/<userid>', methods=['POST'])
+@login_required
+def decline_friend(userid):
+    old_request = FriendRequest.query.filter_by(sender_id=userid, receiver_id=current_user.id).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        db.session.delete(old_request)
+        db.session.commit()
+        return redirect(url_for('friend_requests'))

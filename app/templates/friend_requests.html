@@ -1,5 +1,10 @@
 {% extends "friends.html" %}
 
 {% block friends_block %}
-
+    {% for request in current_user.friend_requests %}
+        {% include "_friend_request.html" %}
+    {% endfor %}
+    {% if current_user.friend_requests.count() == 0 %}
+        <p id="request-list-empty">Nothing to show here!</p>
+    {% endif %}
 {% endblock %}
