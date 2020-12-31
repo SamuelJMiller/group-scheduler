@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if title %}
+            <title>{{ title }} - Grouptime</title>
+        {% else %}
+            <title>SET A TITLE!</title>
+        {% endif %}
+        <!--CSS-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}"> <!--Friggen quotes around 'filename'-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="d-flex flex-column sticky-footer-wrapper">
+            <header>
+                <div id="jumbo-div" class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        {% if current_user.is_authenticated %}
+                            <h1 id="top-h1">Grouptime - {{ current_user.username }}</h1>
+                        {% else %}
+                            <h1 id="top-h1">Grouptime</h1>
+                            <p id="top-p">Manage your Meetings</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if current_user.is_authenticated %}
+                    <div class="topnav" id="mytopnav">
+                        <a href="{{ url_for('index') }}" class="active left">Home</a>
+                        <a href="{{ url_for('friends_list') }}" class="left">Friends</a>
+                        <a href="#" class="left">Link</a>
+                        <a href="{{ url_for('logout') }}" class="right">Sign Out</a>
+                        <a href="{{ url_for('my_profile') }}" class="right">My Profile</a>
+                        <a href="javascript:void(0);" class="icon" onclick="hamburger()"><i class="fa fa-bars"></i></a>
+                    </div>
+                {% else %}
+                    <div class="topnav" id="mytopnav" style="height: 54px;"></div>
+                {% endif %}
+            </header>
+
+            <main id="page-main" class="flex-fill">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </main>
+
+            <footer>
+                <p>&copy; Sam Miller 2020</p>
+            </footer>
+        </div> <!--Main body wrapper-->
+    </body>
+
+    <!--Scripts-->
+    <script src="{{ url_for('static', filename='javascript/script.js') }}"></script> <!-- My script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> <!-- Popper -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap -->
+</html>

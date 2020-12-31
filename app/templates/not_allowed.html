@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>
+        Sorry!<br>
+        You don't have permission to access this page.
+    </h2>
+    <a id="recover-from-bad-page" href="{{ url_for('index') }}">Return Home</a>
+{% endblock %}

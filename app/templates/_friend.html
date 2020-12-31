@@ -1,0 +1,29 @@
+<div class="friend-banner-container">
+    <h2 class="friend-name-header"><a class="friend-header-link" href="{{ url_for('user_profile', userid=friend.id) }}">{{ friend.username }}</a></h2>
+    <button type="button" class="remove-friend-link" data-toggle="modal" data-target="#friend-remove-conf-modal{{ friend.id }}">Unfriend</button>
+
+    <!-- The Modal -->
+    <div class="modal" id="friend-remove-conf-modal{{ friend.id }}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm friend removal</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Are you sure you want to unfriend {{ friend.username }}?
+            </div>
+
+            <div class="modal-buttons">
+                <a class="remove-friend-yes" href="{{ url_for('unfriend', userid=friend.id) }}">Unfriend</a>
+                <button class="remove-friend-no" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>

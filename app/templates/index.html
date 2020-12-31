@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 id="home-header">My Events</h1>
+
+    <a id="add-event-button" href="{{ url_for('newevent') }}">Add Event</a> <!--GOTO add event page-->
+
+    {% for engagement in current_user.engagements %}
+        {% include "_engagement.html" %}
+    {% endfor %}
+{% endblock %}

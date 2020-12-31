@@ -1,0 +1,325 @@
+body {
+    background-color: white;
+}
+
+#jumbo-div {
+    text-align: center;
+    background-color: #990000;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+main {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#top-h1, #top-p {
+    color: white;
+}
+/* Navbar */
+.topnav {
+    background-color: #343a40;
+    overflow: hidden;
+}
+
+.topnav a.left {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a.right {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #d9d9d9;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #d9d9d9;
+    color: black;
+}
+
+.topnav .icon {
+    display: none;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+/* Footer*/
+body, .sticky-footer-wrapper {
+    min-height: 100vh;
+}
+
+.flex-fill {
+    flex: 1 1 auto;
+}
+
+footer {
+    background-color: #343a40;
+    text-align: center;
+}
+footer p {
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+/* Screen adjustments */
+@media only screen and (max-width: 576px) {
+    main {
+        background-color: #d9d9d9;
+        width: 100%;
+    }
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+    .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #343a40;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .topnav a:hover {
+        background-color: white;
+        color: black;
+    }
+    
+    .topnav a.active {
+        background-color: white;
+        color: black;
+    }
+}
+
+@media only screen and (min-width: 577px) {
+    main {
+        background-color: #d9d9d9;
+        width: 75%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    main {
+        background-color: #d9d9d9;
+        width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    main {
+        background-color: #d9d9d9;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    main {
+        background-color: #d9d9d9;
+        width: 40%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+/* |||||||||||||||||||| HOMEPAGE |||||||||||||||||||| */
+
+#home-header {
+    text-align: center;
+}
+
+#add-event-button {
+    display: block;
+    width: 75%;
+    text-align: center;
+    font-size: 200%;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+/* ENGAGEMENT BANNER DIVS */
+
+.event-banner-container {
+    background-color: white;
+    width: 95%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid black;
+}
+.event-banner-container:last-of-type {
+    margin-bottom: 20px;
+}
+
+.event-banner-header, .event-banner-desc, .event-banner-ispublished {
+    text-align: center;
+}
+.event-banner-desc {
+    font-size: 1.5rem;
+}
+
+.event-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.event-edit, .event-delete {
+    display: inline-block;
+    width: 70px;
+    text-align: center; /* Just use text-align for Christ's sake */
+    background-color: #00cc00;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.event-edit {
+    margin-right: 5px;
+}
+.event-delete {
+    margin-left: 5px;
+}
+.event-edit:hover, .event-delete:hover {
+    color: black;
+}
+
+/* CREATE ENGAGEMENT PAGE */
+
+/* EDIT ENGAGEMENT PAGE */
+
+/* USER PAGE */
+
+#add-friend-button {
+    display: block;
+    width: 75%;
+    text-align: center;
+    font-size: 200%;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+#add-friend-button:hover {
+    text-decoration: underline;
+}
+
+.friend-modal-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.friend-modal-buttons button {
+    display: inline-block;
+}
+
+.friend-request-yes-par button {
+    color: white;
+    background-color: green;
+}
+
+#user-page-header, #friends-count-header, #friends-count, #groups-count-header, #groups-count, #user-published-events, #no-published-events {
+    text-align: center;
+}
+
+#user-page-header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#friends-count, #groups-count, #no-published-events {
+    font-size: 1.5rem;
+}
+
+/* MY_PROFILE PAGE */
+
+/* FRIENDS PAGE */
+
+.friend-banner-container {
+    width: 95%;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.friend-banner-container:last-of-type {
+    margin-bottom: 20px;
+}
+
+.remove-friend-link {
+    display: block;
+    width: 20%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    color: red;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+.remove-friend-link:hover {
+    text-decoration: underline;
+}
+
+.friend-header-link {
+    color: black;
+    text-decoration: none;
+}
+.friend-header-link:hover {
+    color: #0000EE;
+    text-decoration: none;
+}
+
+.modal-buttons, .friend-modal-buttons {
+    margin-bottom: 20px;
+}
+
+.remove-friend-yes {
+    color: white;
+    background-color: red;
+    border: 1px solid #990000;
+    padding: 2.5px;
+}
+.remove-friend-yes:hover {
+    color: white;
+}

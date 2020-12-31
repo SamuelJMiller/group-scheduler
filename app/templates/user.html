@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 id="user-page-header">{{ user.username }}'s profile</h2>
+
+    <h3 id="friends-count-header">Friends:</h3>
+    <p id="friends-count">{{ user.user_friends.count() }}</p>
+
+    <h3 id="groups-count-header">Groups:</h3>
+    <p id="groups-count">{{ user.groups.count() }}</p>
+
+    {% if current_user.is_friends_with(user) %}
+        <h2 id="user-published-events">Published Events:</h2>
+        {% if user.engagements.filter_by(is_published_mates=True).count() > 0 %}
+            {% for engagement in user.engagements %}
+                {% if engagement.is_published_mates %}
+                    {% include "_published_engagement.html" %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p id="no-published-events">None</p>
+        {% endif %}
+    {% else %}
+        <button id="add-friend-button" type="button" data-toggle="modal" data-target="#friend-add-conf-modal{{ user.id }}">Add Friend</button>
+
+        <!-- The Modal -->
+        <div class="modal" id="friend-add-conf-modal{{ user.id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm friend request</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Are you sure you want to send a friend request to {{ user.username }}?
+                </div>
+
+                <div class="friend-modal-buttons">
+                    <p class="friend-request-yes-par">
+                        <form action="{{ url_for('add_friend', userid=user.id) }}" method="POST">
+                            {{ form.hidden_tag() }}
+                            {{ form.submit(value='Yes') }}
+                        </form>
+                    </p>
+                    <button class="friend-request-no" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

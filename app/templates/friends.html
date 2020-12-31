@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 id="friends-header">Friends</h2>
+
+    <a id="friends-list-link" href="{{ url_for('friends_list') }}">Current</a>
+    <a id="friend-requests-link" href="{{ url_for('friend_requests') }}">Requests</a>
+    <a id="find-friends-link" href="{{ url_for('find_friends') }}">Find New</a>
+
+    {% block friends_block %}{% endblock %}
+{% endblock %}

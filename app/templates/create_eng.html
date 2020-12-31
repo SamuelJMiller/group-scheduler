@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 id="create-eng-header">New Event</h1>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.weekday.label }}
+            {{ form.weekday(size=32) }}<br>
+            {% for error in form.weekday.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.month.label }}
+            {{ form.month(size=32) }}<br>
+            {% for error in form.month.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.day.label }}
+            {{ form.day(size=32) }}<br>
+            {% for error in form.day.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.time.label }}
+            {{ form.time(size=32) }}<br>
+            {% for error in form.time.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.am_pm.label }}
+            {{ form.am_pm(size=32) }}<br>
+            {% for error in form.am_pm.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description(rows=4) }}<br>
+            {% for error in form.description.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.is_published_mates() }} {{ form.is_published_mates.label }}</p>
+        <p>{{ form.is_published_groupies() }} {{ form.is_published_groupies.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

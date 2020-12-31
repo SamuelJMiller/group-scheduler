@@ -1,0 +1,8 @@
+{% extends "friends.html" %}
+
+{% block friends_block %}
+    <p id="friend-list-instructions">Click friends' names to see their profiles.</p>
+    {% for friend in current_user.user_friends %}
+        {% include "_friend.html" %}
+    {% endfor %}
+{% endblock %}

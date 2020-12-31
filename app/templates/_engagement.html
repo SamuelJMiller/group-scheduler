@@ -1,0 +1,26 @@
+<div class="event-banner-container">
+    <h2 class="event-banner-header">{{ engagement.weekday }}, {{ engagement.month }} {{ engagement.day }}, {{ engagement.time }} {{ engagement.am_pm }}</h2>
+
+    <p class="event-banner-desc">{{ engagement.description }}</p>
+
+    {% if engagement.is_published_mates == True %}
+        <p class="event-banner-ispublished">Published to Friends</p>
+    {% elif engagement.is_published_mates == False %}
+        <p class="event-banner-ispublished">Unpublished to Friends</p>
+    {% else %}
+        <p class="event-banner-ispublished">NULL</p>
+    {% endif %}
+
+    {% if engagement.is_published_groupies == True %}
+        <p class="event-banner-ispublished">Published to Groups</p>
+    {% elif engagement.is_published_groupies == False %}
+        <p class="event-banner-ispublished">Unpublished to Groups</p>
+    {% else %}
+        <p class="event-banner-ispublished">NULL</p>
+    {% endif %}
+
+    <div class="event-buttons">
+        <a class="event-edit" href="{{ url_for('edit_event', eventid=engagement.id) }}">Edit</a>
+        <a class="event-delete" href="{{ url_for('delete_event', eventid=engagement.id) }}">Delete</a>
+    </div>
+</div>
