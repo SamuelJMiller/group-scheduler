@@ -4,7 +4,7 @@ from datetime import datetime
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, CreateEngagementForm, EmptyForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, UserEngagement, UserGroup, GroupEngagement
+from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest
 
 @app.route('/')
 @app.route('/index')
@@ -165,4 +165,6 @@ def unfriend(userid):
 
 @app.route('/add_friend/<userid>', methods=['POST'])
 def add_friend(userid):
-    return render_template('base.html', title=userid)
+    FriendRequest.send_friend_request(current_user.id, userid)
+    db.session.commit()
+    return redirect(url_for('user_profile', userid=userid))

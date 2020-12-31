@@ -225,7 +225,7 @@ footer p {
 
 /* USER PAGE */
 
-#add-friend-button {
+#add-friend-button, #request-pending-notice {
     display: block;
     width: 75%;
     text-align: center;
@@ -248,11 +248,6 @@ footer p {
 
 .friend-modal-buttons button {
     display: inline-block;
-}
-
-.friend-request-yes-par button {
-    color: white;
-    background-color: green;
 }
 
 #user-page-header, #friends-count-header, #friends-count, #groups-count-header, #groups-count, #user-published-events, #no-published-events {

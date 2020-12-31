@@ -20,6 +20,8 @@
         {% else %}
             <p id="no-published-events">None</p>
         {% endif %}
+    {% elif user.friend_requests.filter_by(sender_id=current_user.id).count() > 0 %}
+        <p id="request-pending-notice">Request pending</p>
     {% else %}
         <button id="add-friend-button" type="button" data-toggle="modal" data-target="#friend-add-conf-modal{{ user.id }}">Add Friend</button>
 

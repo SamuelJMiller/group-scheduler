@@ -25,6 +25,7 @@ class User(UserMixin, db.Model):
 
     engagements = db.relationship('UserEngagement', backref='scheduler', lazy='dynamic')
     groups_is_managing = db.relationship('UserGroup', backref='admin', lazy='dynamic')
+    friend_requests = db.relationship('FriendRequest', backref='receiver', lazy='dynamic')
 
     user_friends = db.relationship(
         'User', secondary=friends,
@@ -57,6 +58,15 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+class FriendRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def send_friend_request(sender, receiver):
+        fr = FriendRequest(sender_id=sender, receiver_id=receiver)
+        db.session.add(fr)
 
 class UserEngagement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
