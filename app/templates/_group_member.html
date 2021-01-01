@@ -1,0 +1,9 @@
+<div class="group-member-banner">
+    <h2 class="group-member-header"><a class="user-card-header-link" href="{{ url_for('user_profile', userid=user.id) }}">{{ user.username }}</a></h2>
+
+    {% if group.admin == user %}
+        <p class="group-member-rank">Administrator</p>
+    {% else %}
+        <p class="group-member-rank">Member</p>
+    {% endif %}
+</div>

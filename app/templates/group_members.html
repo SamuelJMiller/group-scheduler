@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h2 id="group-members-header">{{ group.group_name }} members</h2>
 
+    {% for user in group.members %}
+        {% include "_group_member.html" %}
+    {% endfor %}
 {% endblock %}

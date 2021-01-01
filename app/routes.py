@@ -218,3 +218,9 @@ def my_admin():
 def group_profile(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
     return render_template('group.html', title=group.group_name, group=group)
+
+@app.route('/group/<groupid>/members')
+@login_required
+def group_members(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    return render_template('group_members.html', title='Members - ' + group.group_name, group=group)

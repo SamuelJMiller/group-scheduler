@@ -354,7 +354,7 @@ footer p {
     border: 1px solid black;
     border-radius: 10px;
 }
-.group-card:last-of-type {
+.group-card:first-of-type {
     margin-top: 10px;
 }
 
@@ -372,4 +372,18 @@ footer p {
 }
 .group-admin-pointer:hover {
     color: #0000EE;
+}
+
+.group-member-banner {
+    text-align: center;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.group-member-banner:first-of-type {
+    margin-top: 10px;
 }
