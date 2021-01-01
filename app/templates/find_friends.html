@@ -12,8 +12,8 @@
         </form>
     </div>
     {% if search_query|length != 0 %}
-        {% if User.query.filter_by(username=search_query).count() > 0 %}
-            {% for user in User.query.filter(User.username.contains(search_query)).all() %}
+        {% if User.query.filter(User.username.ilike('%' + search_query + '%')).count() > 0 %}
+            {% for user in User.query.filter(User.username.ilike('%' + search_query + '%')).all() %}
                 <div class="random-user-banner">
                     <h2 class="random-user-header"><a class="user-card-header-link" href="{{ url_for('user_profile', userid=user.id) }}">{{ user.username }}</a></h2>
                 </div>
