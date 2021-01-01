@@ -1,0 +1,9 @@
+{% extends "groups.html" %}
+
+{% block groups_block %}
+    <div id="groups-im-in-links">
+        <a id="my-current-groups-link" href="{{ url_for('my_groups') }}">Current</a>
+        <a id="find-new-groups-link" href="{{ url_for('find_groups') }}">Find New</a>
+    </div>
+    {% block groups_sub_block %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,8 @@
+<div class="group-card">
+    <h2 class="group-card-header"><a class="group-header-link" href="">{{ group.group_name }}</a></h2>
+
+    <div class="group-card-info">
+        <p class="group-member-label">Members: {{ group.members.count() }}</p>
+        <p class="group-admin-label">Administrator: <a class="group-admin-pointer" href="{{ url_for('user_profile', userid=group.admin.id) }}">{{ group.admin.username }}</a></p>
+    </div>
+</div>

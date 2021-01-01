@@ -1,0 +1,12 @@
+{% extends "groups_im_in.html" %}
+
+{% block groups_sub_block %}
+    {% if current_user.groups.count() > 0 %}
+    <p id="explore-groups-prompt">Click group names or administrator names to see their info.</p>
+        {% for group in current_user.groups %}
+            {% include "_group.html" %}
+        {% endfor %}
+    {% else %}
+        <p id="no-groups-text">You're not in any groups! Head over to the <a id="find-groups-pointer" href="{{ url_for('find_groups') }}">Find Page</a> to find groups!</p>
+    {% endif %}
+{% endblock %}

@@ -197,3 +197,18 @@ def decline_friend(userid):
         db.session.delete(old_request)
         db.session.commit()
         return redirect(url_for('friend_requests'))
+
+@app.route('/my_groups/current')
+@login_required
+def my_groups():
+    return render_template('my_current_groups.html', title='My Groups')
+
+@app.route('/my_groups/find')
+@login_required
+def find_groups():
+    return render_template('find_new_groups.html', title='Find Groups')
+
+@app.route('/my_admin')
+@login_required
+def my_admin():
+    return render_template('groups_i_run.html', title='My Admin')

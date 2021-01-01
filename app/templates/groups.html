@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 id="groups-header">Groups</h2>
+
+    <div id="group-page-links">
+        <a id="groups-im-in-link" href="{{ url_for('my_groups') }}">Groups I'm In</a> <!-- Home directory links here. -->
+        <a id="groups-i-run-link" href="{{ url_for('my_admin') }}">Groups I Run</a>
+    </div>
+    {% block groups_block %}{% endblock %}
+{% endblock %}
