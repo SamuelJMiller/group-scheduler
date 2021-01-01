@@ -319,7 +319,7 @@ footer p {
     color: white;
 }
 
-.friend-request-banner {
+.friend-request-banner, .random-user-banner {
     text-align: center;
     width: 95%;
     margin-left: auto;
@@ -329,7 +329,7 @@ footer p {
     border: 1px solid black;
     border-radius: 10px;
 }
-.friend-request-banner:first-of-type {
+.friend-request-banner:first-of-type .random-user-banner:first-of-type {
     margin-top: 10px;
 }
 

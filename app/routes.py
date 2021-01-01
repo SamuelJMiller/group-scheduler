@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, CreateEngagementForm, EmptyForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, CreateEngagementForm, EmptyForm, EditProfileForm, UserSearchForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest
 
@@ -151,10 +151,14 @@ def friend_requests():
     d_form = EmptyForm()
     return render_template('friend_requests.html', title='Friend Requests', user=User, acc_form=a_form, dec_form=d_form)
 
-@app.route('/friends/find')
+@app.route('/friends/find', methods=['GET', 'POST'])
 @login_required
 def find_friends():
-    return render_template('find_friends.html', title='Find Friends')
+    form = UserSearchForm()
+    search_query = ""
+    if form.validate_on_submit():
+        search_query += form.text.data
+    return render_template('find_friends.html', title='Find Friends', form=form, search_query=search_query, User=User)
 
 @app.route('/unfriend/<userid>', methods=['GET'])
 @login_required

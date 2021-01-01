@@ -7,6 +7,10 @@ from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendR
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
 
+class UserSearchForm(FlaskForm):
+    text = StringField('Search Query')
+    submit = SubmitField('Search')
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

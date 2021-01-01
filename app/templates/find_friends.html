@@ -1,5 +1,25 @@
 {% extends "friends.html" %}
 
 {% block friends_block %}
-
+    <p id="user-search-desc">Search people:</p>
+    <div id="user-search-div">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <p id="user-search-box">
+                {{ form.text(size=32) }}
+                {{ form.submit(value='Search') }}
+            </p>
+        </form>
+    </div>
+    {% if search_query|length != 0 %}
+        {% if User.query.filter_by(username=search_query).count() > 0 %}
+            {% for user in User.query.filter(User.username.contains(search_query)).all() %}
+                <div class="random-user-banner">
+                    <h2 class="random-user-header"><a class="user-card-header-link" href="{{ url_for('user_profile', userid=user.id) }}">{{ user.username }}</a></h2>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p id="no-user-results">No results found.</p>
+        {% endif %}
+    {% endif %}
 {% endblock %}
