@@ -114,7 +114,7 @@ class GroupEngagement(db.Model):
     description = db.Column(db.String(100), default='Group Activity')
     weekday = db.Column(db.String(20))
     month = db.Column(db.String(20))
-    day = db.Column(db.Integer)
+    day = db.Column(db.String(10))
     time = db.Column(db.String(20))
     am_pm = db.Column(db.String(2))
 

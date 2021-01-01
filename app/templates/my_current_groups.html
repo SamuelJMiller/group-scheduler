@@ -1,11 +1,15 @@
 {% extends "groups_im_in.html" %}
 
 {% block groups_sub_block %}
-    {% if current_user.groups.count() > 0 %}
+    {% if (current_user.groups.count() - current_user.groups_is_managing.count()) > 0 %}
     <p id="explore-groups-prompt">Click group names or administrator names to see their info.</p>
         {% for group in current_user.groups %}
-            {% include "_group.html" %}
+            {% if group.admin != current_user %}
+                {% include "_group_im_in.html" %}
+            {% endif %}
         {% endfor %}
+    {% elif (current_user.groups.count() - current_user.groups_is_managing.count()) == 0 and current_user.groups_is_managing.count() > 0 %}
+        <p id="no-groups-text">You're not in any groups that you don't run! Head over to the <a id="find-groups-pointer" href="{{ url_for('find_groups') }}">Find Page</a> to find groups!</p>
     {% else %}
         <p id="no-groups-text">You're not in any groups! Head over to the <a id="find-groups-pointer" href="{{ url_for('find_groups') }}">Find Page</a> to find groups!</p>
     {% endif %}

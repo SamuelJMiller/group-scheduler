@@ -1,0 +1,7 @@
+<div class="group-card">
+    <h2 class="group-card-header"><a class="group-header-link" href="{{ url_for('group_profile', groupid=group.id) }}">{{ group.group_name }}</a></h2>
+
+    <div class="group-card-info">
+        <p class="group-member-label">Members: {{ group.members.count() }}</p>
+    </div>
+</div>

@@ -212,3 +212,9 @@ def find_groups():
 @login_required
 def my_admin():
     return render_template('groups_i_run.html', title='My Admin')
+
+@app.route('/group/<groupid>')
+@login_required
+def group_profile(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    return render_template('group.html', title=group.group_name, group=group)

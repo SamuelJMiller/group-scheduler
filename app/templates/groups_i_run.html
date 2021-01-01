@@ -1,5 +1,12 @@
 {% extends "groups.html" %}
 
 {% block groups_block %}
-
+    {% if current_user.groups_is_managing.count() > 0 %}
+        <p id="explore-my-groups-prompt">Click your group names to see their info.</p>
+        {% for group in current_user.groups_is_managing %}
+            {% include "_group_i_run.html" %}
+        {% endfor %}
+    {% else %}
+        <p id="no-owned-groups-text">You don't currently run any groups!</p>
+    {% endif %}
 {% endblock %}
