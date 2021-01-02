@@ -223,12 +223,16 @@ def group_profile(groupid):
 @login_required
 def group_members(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
+    if current_user not in group.members:
+        return render_template('not_allowed.html', title='Permission Denied')
     return render_template('group_members.html', title='Members - ' + group.group_name, group=group)
 
 @app.route('/group/<groupid>/events')
 @login_required
 def group_events(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
+    if current_user not in group.members:
+        return render_template('not_allowed.html', title='Permission Denied')
     return render_template('group_events.html', title='Events - ' + group.group_name, group=group)
 
 @app.route('/group/<groupid>/events/new', methods=['GET', 'POST'])
