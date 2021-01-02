@@ -224,3 +224,27 @@ def group_profile(groupid):
 def group_members(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
     return render_template('group_members.html', title='Members - ' + group.group_name, group=group)
+
+@app.route('/group/<groupid>/events')
+@login_required
+def group_events(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    return render_template('group_events.html', title='Events - ' + group.group_name, group=group)
+
+@app.route('/group/<groupid>/events/new', methods=['GET', 'POST'])
+@login_required
+def new_group_event(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    form = CreateEngagementForm()
+    if group.admin != current_user:
+        flash('You do not have permission to create events for that group!')
+        return redirect(url_for('my_groups'))
+    if form.validate_on_submit():
+        event = GroupEngagement(
+            group_id=groupid, description=form.description.data, weekday=form.weekday.data, month=form.month.data,
+            day=form.day.data, time=form.time.data, am_pm=form.am_pm.data
+        )
+        db.session.add(event)
+        db.session.commit()
+        return redirect(url_for('group_events', groupid=groupid))
+    return render_template('group_create_eng.html', title='New Group Event', form=form, group=group)

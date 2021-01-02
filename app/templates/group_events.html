@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h2 id="group-events-header">{{ group.group_name }} events</h2>
 
+    {% if group.admin == current_user %}
+        <a id="group-add-event" href="{{ url_for('new_group_event', groupid=group.id) }}">Add Event</a>
+    {% endif %}
+
+    {% for g_event in group.engagements %}
+        {% if group.admin == current_user %}
+            {% include "_group_event_admin_view.html" %}
+        {% else %}
+            {% include "_group_event_member_view.html" %}
+        {% endif %}
+    {% endfor%}
 {% endblock %}

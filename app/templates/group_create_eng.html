@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 id="create-group-event-header">New Group Event</h2>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <p id="group-event-wkdy-par">
+            {{ form.weekday.label }}
+            {{ form.weekday(size=32) }}<br>
+            {% for error in form.weekday.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="group-event-mnth-par">
+            {{ form.month.label }}
+            {{ form.month(size=32) }}<br>
+            {% for error in form.month.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="group-event-day-par">
+            {{ form.day.label }}
+            {{ form.day(size=32) }}<br>
+            {% for error in form.day.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="group-event-time-par">
+            {{ form.time.label }}
+            {{ form.time(size=32) }}<br>
+            {% for error in form.time.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="group-event-ampm-par">
+            {{ form.am_pm.label }}
+            {{ form.am_pm(size=32) }}<br>
+            {% for error in form.am_pm.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="group-event-desc-par">
+            {{ form.description.label }}<br>
+            {{ form.description(rows=4) }}<br>
+            {% for error in form.description.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="group-event-submit">{{ form.submit() }}</p>
+    </form>
+    <a id="cancel-create-group-eng" href="{{ url_for('group_events', groupid=group.id) }}">Cancel</a>
+{% endblock %}
