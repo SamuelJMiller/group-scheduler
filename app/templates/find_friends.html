@@ -11,7 +11,7 @@
             </p>
         </form>
     </div>
-    {% if search_query|length != 0 %}
+    {% if search_query|length > 0 %}
         {% if User.query.filter(User.username.ilike('%' + search_query + '%')).count() > 0 %}
             {% for user in User.query.filter(User.username.ilike('%' + search_query + '%')).all() %}
                 <div class="random-user-banner">

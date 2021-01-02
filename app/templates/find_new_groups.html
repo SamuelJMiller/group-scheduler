@@ -1,5 +1,23 @@
 {% extends "groups_im_in.html" %}
 
 {% block groups_sub_block %}
-
+    <p id="group-search-desc">Search Groups:</p>
+    <div id="group-search-div">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <p id="group-search-box">
+                {{ form.text(size=32) }}
+                {{ form.submit(value='Search') }}
+            </p>
+        </form>
+    </div>
+    {% if search_query|length > 0 %}
+        {% if UserGroup.query.filter(UserGroup.group_name.ilike('%' + search_query + '%')).count() > 0 %}
+            {% for group in UserGroup.query.filter(UserGroup.group_name.ilike('%' + search_query + '%')).all() %}
+                {% include "_group_im_in.html" %}
+            {% endfor %}
+        {% else %}
+            <p id="no-group-results">No results found.</p>
+        {% endif %}
+    {% endif %}
 {% endblock %}

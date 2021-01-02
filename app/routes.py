@@ -203,10 +203,14 @@ def decline_friend(userid):
 def my_groups():
     return render_template('my_current_groups.html', title='My Groups')
 
-@app.route('/my_groups/find')
+@app.route('/my_groups/find', methods=['GET', 'POST'])
 @login_required
 def find_groups():
-    return render_template('find_new_groups.html', title='Find Groups')
+    form = UserSearchForm()
+    search_query = ""
+    if form.validate_on_submit():
+        search_query += form.text.data
+    return render_template('find_new_groups.html', title='Find Groups', form=form, search_query=search_query, UserGroup=UserGroup)
 
 @app.route('/my_admin')
 @login_required
