@@ -94,7 +94,7 @@ def edit_event(eventid):
     if current_user.id == event.user_id:
         return render_template('edit_eng.html', title='Edit Event', event_desc_title=event.description, form=form)
     else:
-        return render_template('not_allowed.html', title='Restricted Access')
+        return render_template('not_allowed.html', title='Permission Denied')
 
 @app.route('/delete_event/<eventid>', methods=['GET'])
 @login_required
@@ -248,3 +248,40 @@ def new_group_event(groupid):
         db.session.commit()
         return redirect(url_for('group_events', groupid=groupid))
     return render_template('group_create_eng.html', title='New Group Event', form=form, group=group)
+
+@app.route('/group/<groupid>/event/<eventid>/delete')
+@login_required
+def delete_group_event(groupid, eventid):
+    event = GroupEngagement.query.filter_by(id=eventid).first()
+    if event.scheduler.admin != current_user:
+        return render_template('not_allowed.html', title='Permission Denied')
+    db.session.delete(event)
+    db.session.commit()
+    flash('Event deleted!')
+    return redirect(url_for('group_events', groupid=groupid))
+
+@app.route('/group/<groupid>/event/<eventid>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_group_event(groupid, eventid):
+    event = GroupEngagement.query.filter_by(id=eventid).first()
+    form = CreateEngagementForm()
+    if event.scheduler.admin != current_user:
+        return render_template('not_allowed.html', title='Permission Denied')
+    if form.validate_on_submit():
+        event.weekday = form.weekday.data
+        event.month = form.month.data
+        event.day = form.day.data
+        event.time = form.time.data
+        event.am_pm = form.am_pm.data
+        event.description = form.description.data
+
+        db.session.commit()
+        return redirect(url_for('group_events', groupid=groupid))
+    elif request.method == 'GET':
+        form.weekday.data = event.weekday
+        form.month.data = event.month
+        form.day.data = event.day
+        form.time.data = event.time
+        form.am_pm.data = event.am_pm
+        form.description.data = event.description
+    return render_template('group_edit_eng.html', title='Edit Group Event', form=form, event=event, groupid=groupid)
