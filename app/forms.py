@@ -60,3 +60,8 @@ class CreateEngagementForm(FlaskForm):
     is_published_groupies = BooleanField('Publish to Your Groups')
     submit = SubmitField('Create Event')
     update_submit = SubmitField('Update Event')
+
+class CreateGroupForm(FlaskForm):
+    group_name = StringField('Group Name', validators=[DataRequired()])
+    group_desc = TextAreaField('Group Description', validators=[DataRequired(), Length(min=1, max=128)])
+    submit = SubmitField('Create Group')

@@ -3,13 +3,15 @@
 {% block content %}
     <h2 id="group-page-header">{{ group.group_name }}</h2>
 
-    <div id="group-page-links">
-        <a id="group-members-link" href="{{ url_for('group_members', groupid=group.id) }}">Members({{ group.members.count() }})</a>
-        <a id="group-events-link" href="{{ url_for('group_events', groupid=group.id) }}">Events({{ group.engagements.count() }})</a>
-        {% if group.admin == current_user %}
-            <a id="group-manage-link" href="">Manage</a>
-        {% endif %}
-    </div>
+    {% if current_user in group.members %}
+        <div id="group-page-links">
+            <a id="group-members-link" href="{{ url_for('group_members', groupid=group.id) }}">Members({{ group.members.count() }})</a>
+            <a id="group-events-link" href="{{ url_for('group_events', groupid=group.id) }}">Events({{ group.engagements.count() }})</a>
+            {% if group.admin == current_user %}
+                <a id="group-manage-link" href="{{ url_for('manage_group', groupid=group.id) }}">Manage</a>
+            {% endif %}
+        </div>
+    {% endif%}
 
     <h3 id="group-admin-header">Administrator: <a class="group-admin-pointer" href="{{ url_for('user_profile', userid=group.admin.id) }}">{{ group.admin.username }}</a></h3>
 

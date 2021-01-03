@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, CreateEngagementForm, EmptyForm, EditProfileForm, UserSearchForm
+from app.forms import LoginForm, RegistrationForm, CreateEngagementForm, EmptyForm, EditProfileForm, UserSearchForm, CreateGroupForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest
 
@@ -293,3 +293,22 @@ def edit_group_event(groupid, eventid):
         form.am_pm.data = event.am_pm
         form.description.data = event.description
     return render_template('group_edit_eng.html', title='Edit Group Event', form=form, event=event, groupid=groupid)
+
+@app.route('/group/<groupid>/manage', methods=['GET', 'POST'])
+@login_required
+def manage_group(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    form = CreateGroupForm()
+    if group.admin != current_user:
+        return render_template('not_allowed.html', title='Permission Denied')
+    if form.validate_on_submit():
+        group.group_name = form.group_name.data
+        group.group_desc = form.group_desc.data
+
+        db.session.commit()
+        flash('Group info changed!')
+        return redirect(url_for('group_profile', groupid=groupid))
+    elif request.method == 'GET':
+        form.group_name.data = group.group_name
+        form.group_desc.data = group.group_desc
+    return render_template('manage_group.html', title='Manage Group', group=group, form=form)
