@@ -65,3 +65,12 @@ class CreateGroupForm(FlaskForm):
     group_name = StringField('Group Name', validators=[DataRequired()])
     group_desc = TextAreaField('Group Description', validators=[DataRequired(), Length(min=1, max=128)])
     submit = SubmitField('Create Group')
+
+    def validate_group_name(self, group_name):
+        group = UserGroup.query.filter_by(group_name=group_name.data).first()
+        if group is not None:
+            raise ValidationError('Group name already taken!')
+
+class EditGroupForm(FlaskForm):
+    group_desc = TextAreaField('Group Description', validators=[DataRequired(), Length(min=1, max=128)])
+    submit = SubmitField('Update Group Info')

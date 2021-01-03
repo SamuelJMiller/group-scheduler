@@ -4,13 +4,6 @@
     <h2 id="group-manage-header">Manage {{ group.group_name }}</h2>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <p id="edit-group-name">
-            {{ form.group_name.label }}<br>
-            {{ form.group_name(size=32) }}
-            {% for error in form.group_name.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
         <p id="edit-group-desc">
             {{ form.group_desc.label }}<br>
             {{ form.group_desc(rows=4) }}

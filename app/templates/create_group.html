@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 id="create-group-header">New Group</h2>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <p id="create-group-name">
+            {{ form.group_name.label }}<br>
+            {{ form.group_name(size=32) }}<br>
+            {% for error in form.group_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="create-group-desc">
+            {{ form.group_desc.label }}<br>
+            {{ form.group_desc(rows=4) }}<br>
+            {% for error in form.group_desc.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p id="create-group-submit">{{ form.submit(value='Create Group') }}</p>
+    </form>
+    <a id="cancel-create-group" href="{{ url_for('my_admin') }}">Cancel</a>
+{% endblock %}
