@@ -4,8 +4,8 @@
     <h2 id="groups-header">Groups</h2>
 
     <div id="group-page-links">
-        <a id="groups-im-in-link" href="{{ url_for('my_groups') }}">Groups I'm In</a> <!-- Home directory links here. -->
-        <a id="groups-i-run-link" href="{{ url_for('my_admin') }}">Groups I Run</a>
+        <a id="groups-im-in-link" href="{{ url_for('my_groups') }}">Groups I'm In({{ current_user.groups.count() - current_user.groups_is_managing.count() }})</a> <!-- Home directory links here. -->
+        <a id="groups-i-run-link" href="{{ url_for('my_admin') }}">Groups I Run({{ current_user.groups_is_managing.count() }})</a>
     </div>
     {% block groups_block %}{% endblock %}
 {% endblock %}

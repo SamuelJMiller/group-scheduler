@@ -4,8 +4,8 @@
     <h2 id="friends-header">Friends</h2>
 
     <div id="friend-page-links">
-        <a id="friends-list-link" href="{{ url_for('friends_list') }}">Current</a>
-        <a id="friend-requests-link" href="{{ url_for('friend_requests') }}">Requests</a>
+        <a id="friends-list-link" href="{{ url_for('friends_list') }}">Current({{ current_user.user_friends.count() }})</a>
+        <a id="friend-requests-link" href="{{ url_for('friend_requests') }}">Requests({{ current_user.friend_requests.count() }})</a>
         <a id="find-friends-link" href="{{ url_for('find_friends') }}">Find New</a>
     </div>
 
