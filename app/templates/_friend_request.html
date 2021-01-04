@@ -1,13 +1,13 @@
 <div class="friend-request-banner">
     <h2 class="friend-request-header"><a class="user-card-header-link" href="{{ url_for('user_profile', userid=request.sender_id) }}">{{ user.query.filter_by(id=request.sender_id).first().username }}</a></h2>
     <div class="friend-request-button-container">
-        <p id="accept-fr-form-par">
+        <p class="accept-fr-form-par">
             <form action="{{ url_for('accept_friend', userid=request.sender_id) }}" method="POST">
                 {{ acc_form.hidden_tag() }}
                 {{ acc_form.submit(value='Accept') }}
             </form>
         </p>
-        <p id="decline-fr-form-par">
+        <p class="decline-fr-form-par">
             <form action="{{ url_for('decline_friend', userid=request.sender_id) }}" method="POST">
                 {{ dec_form.hidden_tag() }}
                 {{ dec_form.submit(value='Decline') }}

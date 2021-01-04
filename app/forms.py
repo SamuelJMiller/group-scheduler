@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
-from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest
+from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest, GroupRequest
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')

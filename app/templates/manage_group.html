@@ -13,4 +13,10 @@
         </p>
         <p id="edit-group-submit">{{ form.submit(value='Update Group Info') }}</p>
     </form>
+    {% if group.join_requests.count() > 0 and group.admin == current_user %}
+        <h2 id="group-requests-header">Join Requests</h2>
+        {% for request in group.join_requests %}
+            {% include "_group_request.html" %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

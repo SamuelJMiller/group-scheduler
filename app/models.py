@@ -68,6 +68,15 @@ class FriendRequest(db.Model):
         fr = FriendRequest(sender_id=sender, receiver_id=receiver)
         db.session.add(fr)
 
+class GroupRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_user = db.Column(db.Integer)
+    receiver_group = db.Column(db.Integer, db.ForeignKey('user_group.id'))
+
+    def send_group_request(sender, receiver):
+        gr = FriendRequest(sender_user=sender, receiver_group=receiver)
+        db.session.add(gr)
+
 class UserEngagement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -94,6 +103,7 @@ class UserGroup(db.Model):
     engagements = db.relationship('GroupEngagement', backref='scheduler', lazy='dynamic')
 
     members = db.relationship('User', secondary=group_members, backref=db.backref('groups', lazy='dynamic'), lazy='dynamic')
+    join_requests = db.relationship('GroupRequest', backref='receiver', lazy='dynamic')
 
     def add_member(self, user):
         if not user.in_group(self):

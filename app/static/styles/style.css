@@ -443,3 +443,28 @@ footer p {
     margin-right: auto;
     margin-bottom: 20px;
 }
+
+.group-request-banner {
+    text-align: center;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.group-request-banner:first-of-type {
+    margin-top: 10px;
+}
+
+.group-request-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.group-request-button-container button {
+    display: inline-block;
+}

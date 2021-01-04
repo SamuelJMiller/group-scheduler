@@ -4,7 +4,7 @@ from datetime import datetime
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, CreateEngagementForm, EmptyForm, EditProfileForm, UserSearchForm, CreateGroupForm, EditGroupForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest
+from app.models import User, UserEngagement, UserGroup, GroupEngagement, FriendRequest, GroupRequest
 
 @app.route('/')
 @app.route('/index')
@@ -315,6 +315,8 @@ def new_group():
 @login_required
 def manage_group(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
+    a_form= EmptyForm()
+    d_form = EmptyForm()
     form = EditGroupForm()
     if group.admin != current_user:
         return render_template('not_allowed.html', title='Permission Denied')
@@ -326,4 +328,4 @@ def manage_group(groupid):
         return redirect(url_for('group_profile', groupid=groupid))
     elif request.method == 'GET':
         form.group_desc.data = group.group_desc
-    return render_template('manage_group.html', title='Manage Group', group=group, form=form)
+    return render_template('manage_group.html', title='Manage Group', group=group, form=form, User=User, acc_form=a_form, dec_form=d_form)
