@@ -341,4 +341,17 @@ def accept_group_request(userid, groupid):
         group.members.append(user)
         db.session.delete(old_request)
         db.session.commit()
+        flash(user.username + ' is now a member of ' + group.group_name)
+        return redirect(url_for('manage_group', groupid=groupid))
+
+@app.route('/decline_group_request/<userid>/<groupid>', methods=['POST'])
+@login_required
+def decline_group_request(userid, groupid):
+    user = User.query.filter_by(id=userid).first()
+    old_request = GroupRequest.query.filter_by(sender_user=userid, receiver_group=groupid).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        db.session.delete(old_request)
+        db.session.commit()
+        flash('Declined ' + user.username + '\'s join request')
         return redirect(url_for('manage_group', groupid=groupid))
