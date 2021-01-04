@@ -329,3 +329,16 @@ def manage_group(groupid):
     elif request.method == 'GET':
         form.group_desc.data = group.group_desc
     return render_template('manage_group.html', title='Manage Group', group=group, form=form, User=User, acc_form=a_form, dec_form=d_form)
+
+@app.route('/accept_group_request/<userid>/<groupid>', methods=['POST'])
+@login_required
+def accept_group_request(userid, groupid):
+    user = User.query.filter_by(id=userid).first()
+    group = UserGroup.query.filter_by(id=groupid).first()
+    old_request = GroupRequest.query.filter_by(sender_user=userid, receiver_group=groupid).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        group.members.append(user)
+        db.session.delete(old_request)
+        db.session.commit()
+        return redirect(url_for('manage_group', groupid=groupid))
