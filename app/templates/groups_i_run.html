@@ -12,7 +12,7 @@
             {% include "_group_i_run.html" %}
         {% endfor %}
     {% else %}
-        <a id="create-group-link" href="{{ url_for('new_group') }}">Create New Group</a>
         <p id="no-groups-running">You're not currently running any groups!</p>
+        <a id="create-group-link" href="{{ url_for('new_group') }}">Create New Group</a>
     {% endif %}
 {% endblock %}

@@ -18,5 +18,8 @@
         {% for request in group.join_requests %}
             {% include "_group_request.html" %}
         {% endfor %}
+    {% elif group.join_requests.count() == 0 and group.admin == current_user %}
+        <h2 id="group-requests-header">Join Requests</h2>
+        <p id="no-group-request">Nothing to show here!</p>
     {% endif %}
 {% endblock %}

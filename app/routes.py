@@ -217,11 +217,13 @@ def find_groups():
 def my_admin():
     return render_template('groups_i_run.html', title='My Admin')
 
-@app.route('/group/<groupid>')
+@app.route('/group/<groupid>', methods=['GET', 'POST'])
 @login_required
 def group_profile(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
-    return render_template('group.html', title=group.group_name, group=group)
+    form = EmptyForm()
+    e_form = EmptyForm()
+    return render_template('group.html', title=group.group_name, group=group, form=form, exit_form=e_form)
 
 @app.route('/group/<groupid>/members')
 @login_required
@@ -355,3 +357,23 @@ def decline_group_request(userid, groupid):
         db.session.commit()
         flash('Declined ' + user.username + '\'s join request')
         return redirect(url_for('manage_group', groupid=groupid))
+
+@app.route('/send_group_request/<groupid>', methods=['POST'])
+@login_required
+def send_group_request(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        GroupRequest.send_group_request(current_user.id, group.id)
+        db.session.commit()
+        return redirect(url_for('group_profile', groupid=group.id))
+
+@app.route('/leave_group/<groupid>', methods=['POST'])
+@login_required
+def leave_group(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        group.members.remove(current_user)
+        db.session.commit()
+        return redirect(url_for('group_profile', groupid=group.id))

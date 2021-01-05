@@ -74,7 +74,7 @@ class GroupRequest(db.Model):
     receiver_group = db.Column(db.Integer, db.ForeignKey('user_group.id'))
 
     def send_group_request(sender, receiver):
-        gr = FriendRequest(sender_user=sender, receiver_group=receiver)
+        gr = GroupRequest(sender_user=sender, receiver_group=receiver)
         db.session.add(gr)
 
 class UserEngagement(db.Model):

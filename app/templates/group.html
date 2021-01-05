@@ -13,8 +13,77 @@
         </div>
     {% endif%}
 
-    <h3 id="group-admin-header">Administrator: <a class="group-admin-pointer" href="{{ url_for('user_profile', userid=group.admin.id) }}">{{ group.admin.username }}</a></h3>
+    <h3 id="group-admin-header-label">Administrator:</h3>
+    <h3 class="group-admin-header"><a class="group-admin-pointer" href="{{ url_for('user_profile', userid=group.admin.id) }}">{{ group.admin.username }}</a></h3>
 
     <h3 id="group-desc-header">Description:</h3>
     <p id="group-desc-par">{{ group.group_desc }}</p>
+
+    {% if current_user not in group.members and group.join_requests.filter_by(sender_user=current_user.id).count() == 0 %}
+        <button id="send-group-request-button" type="button" data-toggle="modal" data-target="#group-request-conf-button{{ group.id }}">Send Join Request</button>
+
+        <!-- The Modal -->
+        <div class="modal" id="group-request-conf-button{{ group.id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm group join request</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Are you sure you want to send a join request to {{ group.group_name }}?
+                </div>
+
+                <div class="group-modal-buttons">
+                    <p class="group-request-yes-par">
+                        <form action="{{ url_for('send_group_request', groupid=group.id) }}" method="POST">
+                            {{ form.hidden_tag() }}
+                            {{ form.submit(value='Yes') }}
+                        </form>
+                    </p>
+                    <button class="group-request-no" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    {% elif group.join_requests.filter_by(sender_user=current_user.id).count() > 0 %}
+        <p id="group-request-pending">Request pending</p>
+    {% elif current_user in group.members %}
+        <button id="send-group-request-button" type="button" data-toggle="modal" data-target="#group-leave-conf-button{{ group.id }}">Leave Group</button>
+
+        <!-- The Modal -->
+        <div class="modal" id="group-leave-conf-button{{ group.id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm group exit</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Are you sure you want to leave {{ group.group_name }}?
+                </div>
+
+                <div class="group-modal-buttons">
+                    <p class="group-request-yes-par">
+                        <form action="{{ url_for('leave_group', groupid=group.id) }}" method="POST">
+                            {{ exit_form.hidden_tag() }}
+                            {{ exit_form.submit(value='Yes') }}
+                        </form>
+                    </p>
+                    <button class="group-request-no" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
