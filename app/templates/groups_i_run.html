@@ -4,7 +4,7 @@
     {% if current_user.groups_is_managing.count() > 0 %}
         <p id="explore-my-groups-prompt">Click your group names to see their info.</p>
         {% if current_user.groups_is_managing.count() < 5 %}
-            <a id="create-group-link" href="{{ url_for('new_group') }}">Create New Group</a>
+            <a id="create-group-link" href="{{ url_for('new_group') }}">Create New Group({{ 5 - current_user.groups_is_managing.count() }})</a>
         {% else %}
             <p id="create-group-link">Group limit reached</p>
         {% endif %}
@@ -13,6 +13,6 @@
         {% endfor %}
     {% else %}
         <p id="no-groups-running">You're not currently running any groups!</p>
-        <a id="create-group-link" href="{{ url_for('new_group') }}">Create New Group</a>
+        <a id="create-group-link" href="{{ url_for('new_group') }}">Create New Group({{ 5 - current_user.groups_is_managing.count() }})</a>
     {% endif %}
 {% endblock %}
