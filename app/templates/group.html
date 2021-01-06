@@ -53,7 +53,7 @@
         </div>
     {% elif group.join_requests.filter_by(sender_user=current_user.id).count() > 0 %}
         <p id="group-request-pending">Request pending</p>
-    {% elif current_user in group.members %}
+    {% elif current_user in group.members and current_user != group.admin %}
         <button id="send-group-request-button" type="button" data-toggle="modal" data-target="#group-leave-conf-button{{ group.id }}">Leave Group</button>
 
         <!-- The Modal -->
@@ -80,6 +80,38 @@
                         </form>
                     </p>
                     <button class="group-request-no" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    {% elif group.admin == current_user %}
+        <button id="send-group-request-button" type="button" data-toggle="modal" data-target="#group-del-conf-button{{ group.id }}">Delete Group</button>
+
+        <!-- The Modal -->
+        <div class="modal" id="group-del-conf-button{{ group.id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm group deletion</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Are you sure you want to delete this group and kick all of its members?
+                </div>
+
+                <div class="group-modal-buttons">
+                    <p class="group-del-yes-par">
+                        <form action="{{ url_for('delete_group', groupid=group.id) }}" method="POST">
+                            {{ del_form.hidden_tag() }}
+                            {{ del_form.submit(value='Yes') }}
+                        </form>
+                    </p>
+                    <button class="group-del-no" type="button" data-dismiss="modal">Cancel</button>
                 </div>
 
                 </div>

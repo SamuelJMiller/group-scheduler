@@ -223,7 +223,8 @@ def group_profile(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
     form = EmptyForm()
     e_form = EmptyForm()
-    return render_template('group.html', title=group.group_name, group=group, form=form, exit_form=e_form)
+    d_form = EmptyForm()
+    return render_template('group.html', title=group.group_name, group=group, form=form, exit_form=e_form, del_form=d_form)
 
 @app.route('/group/<groupid>/members')
 @login_required
@@ -377,3 +378,16 @@ def leave_group(groupid):
         group.members.remove(current_user)
         db.session.commit()
         return redirect(url_for('group_profile', groupid=group.id))
+
+@app.route('/delete_group/<groupid>', methods=['POST'])
+@login_required
+def delete_group(groupid):
+    group = UserGroup.query.filter_by(id=groupid).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        for i in group.members.all():
+            group.members.remove(i)
+        db.session.delete(group)
+        db.session.commit()
+        flash('Group deleted')
+        return redirect(url_for('my_admin'))
