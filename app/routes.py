@@ -224,7 +224,13 @@ def group_profile(groupid):
     form = EmptyForm()
     e_form = EmptyForm()
     d_form = EmptyForm()
-    return render_template('group.html', title=group.group_name, group=group, form=form, exit_form=e_form, del_form=d_form)
+
+    event_count = 0
+    for user in group.members:
+        for event in user.engagements:
+            if event.is_published_groupies == True:
+                event_count += 1
+    return render_template('group.html', title=group.group_name, group=group, form=form, exit_form=e_form, del_form=d_form, event_count=event_count)
 
 @app.route('/group/<groupid>/members')
 @login_required
@@ -270,7 +276,7 @@ def delete_group_event(groupid, eventid):
     db.session.delete(event)
     db.session.commit()
     flash('Event deleted!')
-    return redirect(url_for('group_events', groupid=groupid))
+    return redirect(url_for('group_profile', groupid=groupid))
 
 @app.route('/group/<groupid>/event/<eventid>/edit', methods=['GET', 'POST'])
 @login_required

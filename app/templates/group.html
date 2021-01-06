@@ -6,7 +6,7 @@
     {% if current_user in group.members %}
         <div id="group-page-links">
             <a id="group-members-link" href="{{ url_for('group_members', groupid=group.id) }}">Members({{ group.members.count() }})</a>
-            <a id="group-events-link" href="{{ url_for('group_events', groupid=group.id) }}">Events({{ group.engagements.count() }})</a>
+            <a id="group-events-link" href="{{ url_for('group_events', groupid=group.id) }}">Member Events({{ event_count }})</a>
             {% if group.admin == current_user %}
                 <a id="group-manage-link" href="{{ url_for('manage_group', groupid=group.id) }}">Manage</a>
             {% endif %}
@@ -118,4 +118,18 @@
             </div>
         </div>
     {% endif %}
+
+    <h2 id="group-events-header">{{ group.group_name }} events</h2>
+
+    {% if group.admin == current_user %}
+        <a id="group-add-event" href="{{ url_for('new_group_event', groupid=group.id) }}">Add Event</a>
+    {% endif %}
+
+    {% for g_event in group.engagements %}
+        {% if group.admin == current_user %}
+            {% include "_group_event_admin_view.html" %}
+        {% else %}
+            {% include "_group_event_member_view.html" %}
+        {% endif %}
+    {% endfor%}
 {% endblock %}
