@@ -230,9 +230,10 @@ def group_profile(groupid):
 @login_required
 def group_members(groupid):
     group = UserGroup.query.filter_by(id=groupid).first()
+    k_form = EmptyForm()
     if current_user not in group.members:
         return render_template('not_allowed.html', title='Permission Denied')
-    return render_template('group_members.html', title='Members - ' + group.group_name, group=group)
+    return render_template('group_members.html', title='Members - ' + group.group_name, group=group, kick_form=k_form)
 
 @app.route('/group/<groupid>/events')
 @login_required
@@ -391,3 +392,15 @@ def delete_group(groupid):
         db.session.commit()
         flash('Group deleted')
         return redirect(url_for('my_admin'))
+
+@app.route('/kick_member/<userid>/<groupid>', methods=['POST'])
+@login_required
+def kick_member(userid, groupid):
+    user = User.query.filter_by(id=userid).first()
+    group = UserGroup.query.filter_by(id=groupid).first()
+    form = EmptyForm()
+    if form.validate_on_submit():
+        group.members.remove(user)
+        db.session.commit()
+        flash('Kicked ' + user.username)
+        return redirect(url_for('group_members', groupid=group.id))

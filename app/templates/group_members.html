@@ -4,6 +4,14 @@
     <h2 id="group-members-header">{{ group.group_name }} members</h2>
 
     {% for user in group.members %}
-        {% include "_group_member.html" %}
+        {% if group.admin == current_user %}
+            {% if group.admin == user %}
+                {% include "_group_member.html" %}
+            {% else %}
+                {% include "_group_member_ad_view.html" %}
+            {% endif %}
+        {% else %}
+            {% include "_group_member.html" %}
+        {% endif %}
     {% endfor %}
 {% endblock %}

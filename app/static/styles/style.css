@@ -506,3 +506,10 @@ footer p {
     margin-right: auto;
     margin-bottom: 20px;
 }
+
+#group-kick {
+    color: red;
+    border: 1px solid red;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

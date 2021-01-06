@@ -1,0 +1,37 @@
+<div class="group-member-banner">
+    <h2 class="group-member-header"><a class="user-card-header-link" href="{{ url_for('user_profile', userid=user.id) }}">{{ user.username }}</a></h2>
+
+    <p class="group-member-rank">Member</p>
+
+    <button id="group-kick" type="button" data-toggle="modal" data-target="#group-kick-conf{{ user.id }}">Kick</button>
+
+    <!-- The Modal -->
+    <div class="modal" id="group-kick-conf{{ user.id }}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm member kick</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Are you sure you want to kick {{ user.username }} from the group?
+            </div>
+
+            <div class="group-modal-buttons">
+                <p class="group-kick-yes-par">
+                    <form action="{{ url_for('kick_member', userid=user.id, groupid=group.id) }}" method="POST">
+                        {{ kick_form.hidden_tag() }}
+                        {{ kick_form.submit(value='Yes') }}
+                    </form>
+                </p>
+                <button class="group-kick-no" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
