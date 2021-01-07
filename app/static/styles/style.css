@@ -265,6 +265,30 @@ footer p {
 
 /* MY_PROFILE PAGE */
 
+#my-profile-header, #username-header, #my-username, #email-header, #my-email {
+    text-align: center;
+}
+
+#my-username, #my-email {
+    font-size: 1.5rem;
+}
+
+#username-header, #email-header {
+    margin-top: 20px;
+}
+
+#edit-profile-link {
+    display: block;
+    width: 75%;
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
 /* FRIENDS PAGE */
 
 .friend-banner-container {
