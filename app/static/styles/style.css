@@ -674,3 +674,9 @@ footer p {
 #sign-in-prompt {
     margin-bottom: 20px;
 }
+
+/* FLASH MESSAGES */
+
+.flash-message {
+    text-align: center;
+}
