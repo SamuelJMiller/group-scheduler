@@ -221,7 +221,41 @@ footer p {
 
 /* CREATE ENGAGEMENT PAGE */
 
+#create-eng-header, #event-wkdy, #event-month, #event-day, #event-time, #event-ampm, #event-desc, #is-friends-published, #is-groups-published, #submit-event, #cancel-create-eng {
+    text-align: center;
+}
+
+#cancel-create-eng {
+    display: block;
+    width: 75%;
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
 /* EDIT ENGAGEMENT PAGE */
+
+#edit-eng-header, #cancel-event-edit {
+    text-align: center;
+}
+
+#cancel-event-edit {
+    display: block;
+    width: 75%;
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
 
 /* USER PAGE */
 

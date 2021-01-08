@@ -1,54 +1,54 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 id="create-eng-header">New Event</h1>
+    <h2 id="create-eng-header">New Event</h1>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.weekday.label }}
+        <p id="event-wkdy">
+            {{ form.weekday.label }}<br>
             {{ form.weekday(size=32) }}<br>
             {% for error in form.weekday.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.month.label }}
+        <p id="event-month">
+            {{ form.month.label }}<br>
             {{ form.month(size=32) }}<br>
             {% for error in form.month.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.day.label }}
+        <p id="event-day">
+            {{ form.day.label }}<br>
             {{ form.day(size=32) }}<br>
             {% for error in form.day.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.time.label }}
+        <p id="event-time">
+            {{ form.time.label }}<br>
             {{ form.time(size=32) }}<br>
             {% for error in form.time.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.am_pm.label }}
+        <p id="event-ampm">
+            {{ form.am_pm.label }}<br>
             {{ form.am_pm(size=32) }}<br>
             {% for error in form.am_pm.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        <p id="event-desc">
             {{ form.description.label }}<br>
             {{ form.description(rows=4) }}<br>
             {% for error in form.description.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.is_published_mates() }} {{ form.is_published_mates.label }}</p>
-        <p>{{ form.is_published_groupies() }} {{ form.is_published_groupies.label }}</p>
-        <p>{{ form.submit() }}</p>
+        <p id="is-friends-published">{{ form.is_published_mates() }} {{ form.is_published_mates.label }}</p>
+        <p id="is-groups-published">{{ form.is_published_groupies() }} {{ form.is_published_groupies.label }}</p>
+        <p id="submit-event">{{ form.submit() }}</p>
     </form>
     <a id="cancel-create-eng" href="{{ url_for('index') }}">Cancel</a>
 {% endblock %}
