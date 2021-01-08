@@ -297,6 +297,10 @@ footer p {
     font-size: 1.5rem;
 }
 
+#add-friend-button {
+    margin-bottom: 20px;
+}
+
 /* MY_PROFILE PAGE */
 
 #my-profile-header, #username-header, #my-username, #email-header, #my-email {
