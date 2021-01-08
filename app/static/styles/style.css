@@ -625,3 +625,13 @@ footer p {
 #sign-up-prompt {
     margin-bottom: 20px;
 }
+
+/* REGISTRATION PAGE */
+
+#sign-up-header, #sign-up-username, #sign-up-email, .sign-up-pass, #sign-up-submit, #sign-in-prompt {
+    text-align: center;
+}
+
+#sign-in-prompt {
+    margin-bottom: 20px;
+}

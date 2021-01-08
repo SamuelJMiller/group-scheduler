@@ -1,38 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign Up</h1>
+    <h2 id="sign-up-header">Sign Up</h2>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <p>
+        <p id="sign-up-username">
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}<br>
             {% for error in form.username.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        <p id="sign-up-email">
             {{ form.email.label }}<br>
             {{ form.email(size=32) }}<br>
             {% for error in form.email.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        <p class="sign-up-pass">
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
             {% for error in form.password.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        <p class="sign-up-pass">
             {{ form.password2.label }}<br>
             {{ form.password2(size=32) }}<br>
             {% for error in form.password2.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p id="sign-up-submit">{{ form.submit() }}</p>
     </form>
     <p id="sign-in-prompt">Already have an account? <a id="sign-in-from-register" href="{{ url_for('login') }}">Sign In</a></p>
 {% endblock %}
