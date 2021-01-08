@@ -611,3 +611,17 @@ footer p {
     margin-right: auto;
     margin-bottom: 20px;
 }
+
+/* LOGIN PAGE */
+
+#sign-in-header, #sign-in-username, #sign-in-email, #sign-in-remember, #sign-in-submit, #sign-up-prompt {
+    text-align: center;
+}
+
+#sign-in-username, #sign-in-email, #sign-in-remember {
+    margin-top: 20px;
+}
+
+#sign-up-prompt {
+    margin-bottom: 20px;
+}
