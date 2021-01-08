@@ -636,6 +636,32 @@ footer p {
     margin-bottom: 10px;
 }
 
+#group-page-links, #groups-im-in-links {
+    background-color: #343a40;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#group-page-links a, #groups-im-in-links a {
+    color: white;
+    display: inline-block;
+    padding: 14px 16px;
+}
+#group-page-links a:hover, #groups-im-in-links a:hover {
+    text-decoration: none;
+    background-color: white;
+    color: black;
+}
+
+#explore-groups-prompt, #explore-my-groups-prompt, #group-search-desc, #no-groups-text, #no-groups-running {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#group-search-box, #groups-header {
+    text-align: center;
+}
+
 /* ERROR PAGES */
 
 #not-found-header, #server-error-header, #error-return-home {
