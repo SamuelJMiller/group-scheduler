@@ -119,17 +119,25 @@
         </div>
     {% endif %}
 
-    <h2 id="group-events-header">{{ group.group_name }} events</h2>
+    {% if current_user in group.members %}
+        <h2 id="group-events-header">{{ group.group_name }} events</h2>
+    {% endif %}
 
     {% if group.admin == current_user %}
         <a id="group-add-event" href="{{ url_for('new_group_event', groupid=group.id) }}">Add Event</a>
     {% endif %}
 
-    {% for g_event in group.engagements %}
-        {% if group.admin == current_user %}
-            {% include "_group_event_admin_view.html" %}
-        {% else %}
-            {% include "_group_event_member_view.html" %}
+    {% if current_user in group.members and group.engagements.count() > 0 %}
+        {% for g_event in group.engagements %}
+            {% if group.admin == current_user %}
+                {% include "_group_event_admin_view.html" %}
+            {% else %}
+                {% include "_group_event_member_view.html" %}
+            {% endif %}
+        {% endfor%}
+    {% elif current_user in group.members and group.engagements.count() == 0 %}
+        {% if group.admin != current_user %}
+            <p id="no-groupwide-events">None</p>
         {% endif %}
-    {% endfor%}
+    {% endif %}
 {% endblock %}

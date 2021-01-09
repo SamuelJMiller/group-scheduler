@@ -264,7 +264,7 @@ def new_group_event(groupid):
         )
         db.session.add(event)
         db.session.commit()
-        return redirect(url_for('group_events', groupid=groupid))
+        return redirect(url_for('group_profile', groupid=groupid))
     return render_template('group_create_eng.html', title='New Group Event', form=form, group=group)
 
 @app.route('/group/<groupid>/event/<eventid>/delete')
@@ -294,7 +294,7 @@ def edit_group_event(groupid, eventid):
         event.description = form.description.data
 
         db.session.commit()
-        return redirect(url_for('group_events', groupid=groupid))
+        return redirect(url_for('group_profile', groupid=groupid))
     elif request.method == 'GET':
         form.weekday.data = event.weekday
         form.month.data = event.month

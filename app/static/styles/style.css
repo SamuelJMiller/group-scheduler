@@ -662,6 +662,40 @@ footer p {
     text-align: center;
 }
 
+#group-page-header, #group-admin-header-label, .group-admin-header, #group-desc-header, #group-desc-par, #group-events-header, #group-members-header, #no-groupwide-events {
+    text-align: center;
+}
+
+#group-admin-header-label {
+    margin-top: 10px;
+}
+
+#group-desc-header {
+    margin-top: 30px;
+}
+
+#create-group-header, #create-group-name, #create-group-desc, #create-group-submit, #cancel-create-group, #group-manage-header, #edit-group-desc, #edit-group-submit, #group-requests-header, #no-group-request,
+#edit-group-eng-header {
+    text-align: center;
+}
+
+#cancel-create-group, #cancel-edit-group-eng {
+    display: block;
+    width: 75%;
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+#create-group-event-header {
+    text-align: center;
+}
+
 /* ERROR PAGES */
 
 #not-found-header, #server-error-header, #error-return-home {

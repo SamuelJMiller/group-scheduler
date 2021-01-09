@@ -4,49 +4,49 @@
     <h2 id="edit-group-eng-header">{{ event.description }}</h2>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <p id="group-event-wkdy-par">
-            {{ form.weekday.label }}
+        <p id="event-wkdy">
+            {{ form.weekday.label }}<br>
             {{ form.weekday(size=32) }}<br>
             {% for error in form.weekday.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p id="group-event-mnth-par">
-            {{ form.month.label }}
+        <p id="event-month">
+            {{ form.month.label }}<br>
             {{ form.month(size=32) }}<br>
             {% for error in form.month.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p id="group-event-day-par">
-            {{ form.day.label }}
+        <p id="event-day">
+            {{ form.day.label }}<br>
             {{ form.day(size=32) }}<br>
             {% for error in form.day.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p id="group-event-time-par">
-            {{ form.time.label }}
+        <p id="event-time">
+            {{ form.time.label }}<br>
             {{ form.time(size=32) }}<br>
             {% for error in form.time.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p id="group-event-ampm-par">
-            {{ form.am_pm.label }}
+        <p id="event-ampm">
+            {{ form.am_pm.label }}<br>
             {{ form.am_pm(size=32) }}<br>
             {% for error in form.am_pm.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p id="group-event-desc-par">
+        <p id="event-desc">
             {{ form.description.label }}<br>
             {{ form.description(rows=4) }}<br>
             {% for error in form.description.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p id="group-event-submit">{{ form.update_submit() }}</p>
+        <p id="submit-event">{{ form.update_submit() }}</p>
     </form>
-    <a id="cancel-edit-group-eng" href="{{ url_for('group_events', groupid=groupid) }}">Cancel</a>
+    <a id="cancel-edit-group-eng" href="{{ url_for('group_profile', groupid=groupid) }}">Cancel</a>
 {% endblock %}
