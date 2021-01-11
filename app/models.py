@@ -81,11 +81,8 @@ class UserEngagement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     description = db.Column(db.String(100), default='Unavailable')
-    weekday = db.Column(db.String(20))
-    month = db.Column(db.String(20))
-    day = db.Column(db.String(10))
-    time = db.Column(db.String(20))
-    am_pm = db.Column(db.String(2))
+    date = db.Column(db.String(100))
+    time = db.Column(db.String(50))
     is_published_mates = db.Column(db.Boolean, default=False)
     is_published_groupies = db.Column(db.Boolean, default=False)
 
@@ -122,11 +119,8 @@ class GroupEngagement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     group_id = db.Column(db.Integer, db.ForeignKey('user_group.id'))
     description = db.Column(db.String(100), default='Group Activity')
-    weekday = db.Column(db.String(20))
-    month = db.Column(db.String(20))
-    day = db.Column(db.String(10))
-    time = db.Column(db.String(20))
-    am_pm = db.Column(db.String(2))
+    date = db.Column(db.String(100))
+    time = db.Column(db.String(50))
 
     def __repr__(self):
         return 'Group number {} has an engagement on {}, {} {} at {} {} which is scheduled by {} and is described as: {}'.format(
