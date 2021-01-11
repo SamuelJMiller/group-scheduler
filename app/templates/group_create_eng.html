@@ -4,24 +4,10 @@
     <h2 id="create-group-event-header">New Group Event</h2>
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <p id="event-wkdy">
-            {{ form.weekday.label }}<br>
-            {{ form.weekday(size=32) }}<br>
-            {% for error in form.weekday.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p id="event-month">
-            {{ form.month.label }}<br>
-            {{ form.month(size=32) }}<br>
-            {% for error in form.month.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p id="event-day">
-            {{ form.day.label }}<br>
-            {{ form.day(size=32) }}<br>
-            {% for error in form.day.errors %}
+        <p id="event-date">
+            {{ form.date.label }}<br>
+            {{ form.date(size=32) }}<br>
+            {% for error in form.date.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
@@ -29,13 +15,6 @@
             {{ form.time.label }}<br>
             {{ form.time(size=32) }}<br>
             {% for error in form.time.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p id="event-ampm">
-            {{ form.am_pm.label }}<br>
-            {{ form.am_pm(size=32) }}<br>
-            {% for error in form.am_pm.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>

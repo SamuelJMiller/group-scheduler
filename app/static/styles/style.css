@@ -221,7 +221,7 @@ footer p {
 
 /* CREATE ENGAGEMENT PAGE */
 
-#create-eng-header, #event-wkdy, #event-month, #event-day, #event-time, #event-ampm, #event-desc, #is-friends-published, #is-groups-published, #submit-event, #cancel-create-eng {
+#create-eng-header, #event-date, #event-time, #event-desc, #is-friends-published, #is-groups-published, #submit-event, #cancel-create-eng {
     text-align: center;
 }
 
