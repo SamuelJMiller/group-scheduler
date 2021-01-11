@@ -55,8 +55,8 @@ def newevent():
     form = CreateEngagementForm()
     if form.validate_on_submit():
         event = UserEngagement(
-            user_id=current_user.id, description=form.description.data, weekday=form.weekday.data, month=form.month.data, day=form.day.data,
-            time=form.time.data, am_pm=form.am_pm.data, is_published_mates=form.is_published_mates.data,
+            user_id=current_user.id, description=form.description.data, date=form.date.data,
+            time=form.time.data, is_published_mates=form.is_published_mates.data,
             is_published_groupies=form.is_published_groupies.data
         )
         db.session.add(event)
@@ -70,11 +70,8 @@ def edit_event(eventid):
     form = CreateEngagementForm()
     event = UserEngagement.query.filter_by(id=eventid).first()
     if form.validate_on_submit():
-        event.weekday = form.weekday.data
-        event.month = form.month.data
-        event.day = form.day.data
+        event.date = form.date.data
         event.time = form.time.data
-        event.am_pm = form.am_pm.data
         event.description = form.description.data
         event.is_published_mates = form.is_published_mates.data
         event.is_published_groupies = form.is_published_groupies.data
@@ -83,11 +80,8 @@ def edit_event(eventid):
 
         return redirect(url_for('index'))
     elif request.method == 'GET':
-        form.weekday.data = event.weekday
-        form.month.data = event.month
-        form.day.data = event.day
+        form.date.data = event.date
         form.time.data = event.time
-        form.am_pm.data = event.am_pm
         form.description.data = event.description
         form.is_published_mates.data = event.is_published_mates
         form.is_published_groupies.data = event.is_published_groupies
@@ -259,8 +253,7 @@ def new_group_event(groupid):
         return redirect(url_for('my_groups'))
     if form.validate_on_submit():
         event = GroupEngagement(
-            group_id=groupid, description=form.description.data, weekday=form.weekday.data, month=form.month.data,
-            day=form.day.data, time=form.time.data, am_pm=form.am_pm.data
+            group_id=groupid, description=form.description.data, date=form.date.data, time=form.time.data
         )
         db.session.add(event)
         db.session.commit()
@@ -286,21 +279,15 @@ def edit_group_event(groupid, eventid):
     if event.scheduler.admin != current_user:
         return render_template('not_allowed.html', title='Permission Denied')
     if form.validate_on_submit():
-        event.weekday = form.weekday.data
-        event.month = form.month.data
-        event.day = form.day.data
+        event.date = form.date.data
         event.time = form.time.data
-        event.am_pm = form.am_pm.data
         event.description = form.description.data
 
         db.session.commit()
         return redirect(url_for('group_profile', groupid=groupid))
     elif request.method == 'GET':
-        form.weekday.data = event.weekday
-        form.month.data = event.month
-        form.day.data = event.day
+        form.date.data = event.date
         form.time.data = event.time
-        form.am_pm.data = event.am_pm
         form.description.data = event.description
     return render_template('group_edit_eng.html', title='Edit Group Event', form=form, event=event, groupid=groupid)
 
