@@ -50,11 +50,8 @@ class EditProfileForm(FlaskForm):
             raise ValidationError('Email already used!')
 
 class CreateEngagementForm(FlaskForm):
-    weekday = StringField('Weekday')
-    month = StringField('Month')
-    day = StringField('Day')
+    date = StringField('Date', validators=[DataRequired()])
     time = StringField('Time', validators=[DataRequired()])
-    am_pm = StringField('AM/PM')
     description = TextAreaField('Short Description', validators=[Length(min=0, max=128)])
     is_published_mates = BooleanField('Publish to Your Friends')
     is_published_groupies = BooleanField('Publish to Your Groups')
